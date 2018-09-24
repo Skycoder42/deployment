@@ -1,0 +1,41 @@
+{
+	"name": "qtdatasync",
+	"buildsystem": "qmake",
+	"make-install-args": ["INSTALL_ROOT=/app/datasync"],
+	"build-options": {
+		"env": {
+			"QPMX_CACHE_DIR": "/app/.qpmx"
+		},
+		"build-args": [ "--share=network" ]
+	},
+	"sources": [
+		{
+			"type": "git",
+			"url": "https://github.com/Skycoder42/QtDataSync.git",
+			"tag": "4.1.0"
+		},
+		{
+			"type": "shell",
+			"commands": [
+				"ln -s /app/include src/3rdparty/cryptopp/include",
+				"ln -s /app/lib src/3rdparty/cryptopp/lib"
+			]
+		}
+	],
+	"cleanup": [
+		"/.qpmx",
+		"/bin",
+		"/lib/cmake",
+		"/lib/mkspecs",
+		"/lib/pkgconfig",
+		"/include",
+		"/doc",
+		"/services",
+		"/translations/*.ts",
+		"*.la",
+		"*.prl"
+	],
+	"post-install": [
+		"/app/fix-module.sh datasync datasync"
+	]
+}

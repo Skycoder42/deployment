@@ -1,0 +1,23 @@
+{
+	"name": "git",
+	"buildsystem": "simple",
+	"sources": [
+		{
+			"type": "git",
+			"url": "https://github.com/git/git.git",
+			"tag": "v2.19.0"
+		}
+	],
+	"build-commands": [
+		"make configure",
+		"./configure --prefix=/app",
+		"make -j$(nproc) all",
+		"make install"
+	],
+	"cleanup": [
+		"/lib/debug",
+		"/share/git-core",
+		"/share/git-gui",
+		"/share/gitweb"
+	]
+}
