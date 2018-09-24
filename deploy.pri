@@ -54,7 +54,7 @@ QMAKE_EXTRA_TARGETS += deploy_target
 			QMAKE_WINDEPLOYQT += --no-translations $$DEPLOY_EXTRA_ARGS
 		}
 
-		for(bin, DEPLOY_BINS): run_deploy.commands += $$QMAKE_WINDEPLOYQT \"$(INSTALL_ROOT)$$bin\"$$escape_expand(\n\t)
+		for(bin, DEPLOY_BINS): run_deploy.commands += $$QMAKE_WINDEPLOYQT \"$(INSTALL_ROOT)$$shell_path($$bin)\"$$escape_expand(\n\t)
 
 		run_deploy.commands += echo [Paths] > \"$(INSTALL_ROOT)$$INSTALL_BINS/qt.conf\" $$escape_expand(\n\t)
 		run_deploy.commands += echo Prefix=. >> \"$(INSTALL_ROOT)$$INSTALL_BINS/qt.conf\" $$escape_expand(\n\t)
