@@ -1,4 +1,4 @@
-include($$PWD/install.pri)
+!deployment_install_pri_included: include($$PWD/install.pri)
 
 DISTFILES += \
 	$$PWD/qm-combine.py

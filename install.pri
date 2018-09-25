@@ -40,3 +40,5 @@ isEmpty(INSTALL_SHARE): INSTALL_SHARE = $${PREFIX}/share
 
 auto_lrelease: PRE_TARGETDEPS += lrelease
 android: CONFIG += no_headers_install
+
+CONFIG += deployment_install_pri_included
