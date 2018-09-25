@@ -9,9 +9,11 @@ isEmpty(VERSION): error("VERSION qmake variable must be defined with the current
 
 ### special install additions
 # mac app combination
-!no_bundle_deploy:mac:app_bundle {
-	install.commands += cp -pPRfv "$(INSTALL_ROOT)$$INSTALL_APPS/" "$(INSTALL_ROOT)$${PREFIX}/"$$escape_expand(\n\t) \
-		rm -rf "$(INSTALL_ROOT)$$INSTALL_APPS"$$escape_expand(\n\t)
+!no_bundle_deploy:mac {
+	app_bundle {
+		install.commands += cp -pPRfv "$(INSTALL_ROOT)$$INSTALL_APPS/" "$(INSTALL_ROOT)$${PREFIX}/"$$escape_expand(\n\t) \
+			rm -rf "$(INSTALL_ROOT)$$INSTALL_APPS"$$escape_expand(\n\t)
+	}
 
 	for(sublib, BUNDLE_EXTRA_LIBS) {
 		LIBTRGT = $$first($${sublib}.target)
