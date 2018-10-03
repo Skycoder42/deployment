@@ -9,7 +9,7 @@
 		{
 			"type": "git",
 			"url": "https://github.com/Skycoder42/QtJsonSerializer.git",
-			"tag": "3.1.2"
+			"tag": "3.2.0"
 		}
 	],
 	"cleanup": [
