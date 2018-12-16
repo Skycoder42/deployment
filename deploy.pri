@@ -56,11 +56,12 @@ QMAKE_EXTRA_TARGETS += deploy_target
 			QMAKE_WINDEPLOYQT += --no-translations $$DEPLOY_EXTRA_ARGS
 		}
 
-		for(bin, DEPLOY_BINS): run_deploy.commands += $$QMAKE_WINDEPLOYQT \"$(INSTALL_ROOT)$$shell_path($$bin)\"$$escape_expand(\n\t)
+		for(bin, DEPLOY_BINS): run_deploy.commands += $$QMAKE_WINDEPLOYQT \"$(INSTALL_ROOT)$$bin\"$$escape_expand(\n\t)
 
 		run_deploy.commands += echo [Paths] > \"$(INSTALL_ROOT)$$INSTALL_BINS/qt.conf\" $$escape_expand(\n\t)
 		run_deploy.commands += echo Prefix=. >> \"$(INSTALL_ROOT)$$INSTALL_BINS/qt.conf\" $$escape_expand(\n\t)
 		run_deploy.commands += echo Binaries=. >> \"$(INSTALL_ROOT)$$INSTALL_BINS/qt.conf\" $$escape_expand(\n\t)
+		run_deploy.commands += echo Libraries=. >> \"$(INSTALL_ROOT)$$INSTALL_BINS/qt.conf\" $$escape_expand(\n\t)
 		run_deploy.commands += echo Plugins=. >> \"$(INSTALL_ROOT)$$INSTALL_BINS/qt.conf\" $$escape_expand(\n\t)
 	} else:mac {
 		isEmpty(QMAKE_MACDEPLOYQT): qtPrepareTool(QMAKE_MACDEPLOYQT, macdeployqt)
@@ -75,16 +76,18 @@ QMAKE_EXTRA_TARGETS += deploy_target
 		QMAKE_ANDROIDDEPLOYQT += --deployment bundled --gradle
 		CONFIG(release, debug|release) {
 			QMAKE_ANDROIDDEPLOYQT += --release --no-gdbserver
+			APK_PREFIX = release
 			APK_TYPE = release-unsigned
 		}
 		CONFIG(debug, debug|release) {
 			QMAKE_ANDROIDDEPLOYQT += --gdbserver
+			APK_PREFIX = debug
 			APK_TYPE = debug
 		}
 
 		for(bin, DEPLOY_BINS) {
 			run_deploy.commands += $$QMAKE_ANDROIDDEPLOYQT --input $$shell_path($$bin) --output \"$(INSTALL_ROOT)$$PREFIX\" $$escape_expand(\n\t)
-			run_deploy.commands += $$QMAKE_INSTALL_FILE \"$(INSTALL_ROOT)$$PREFIX/build/outputs/apk/`basename \"$(INSTALL_ROOT)$$PREFIX\"`-$${APK_TYPE}.apk\" \"$(INSTALL_ROOT)/$${PROJECT_TARGET}-$${VERSION}_$${QT_PLATFORM}_$${APK_TYPE}.apk\"
+			run_deploy.commands += $$QMAKE_INSTALL_FILE \"$(INSTALL_ROOT)$$PREFIX/build/outputs/apk/$$APK_PREFIX/`basename \"$(INSTALL_ROOT)$$PREFIX\"`-$${APK_TYPE}.apk\" \"$(INSTALL_ROOT)/$${PROJECT_TARGET}-$${VERSION}_$${QT_PLATFORM}_$${APK_TYPE}.apk\"
 		}
 	}
 
