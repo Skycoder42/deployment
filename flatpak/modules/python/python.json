@@ -1,0 +1,17 @@
+{
+	"name": "python",
+	"sources": [
+		{
+			"type": "archive",
+			"url": "https://www.python.org/ftp/python/3.7.1/Python-3.7.1.tar.xz",
+			"sha256": "fa7e2b8e8c9402f192ad56dc4f814089d1c4466c97d780f5e5acc02c04243d6d"
+		}
+	],
+	"cleanup": [
+		"/bin",
+		"/lib",
+		"/include",
+		"/doc",
+		"/share"
+	]
+}

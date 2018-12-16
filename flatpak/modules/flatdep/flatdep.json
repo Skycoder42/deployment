@@ -1,0 +1,13 @@
+{
+    "name": "flatdep-base",
+    "buildsystem": "simple",
+    "sources": [
+        {
+            "type": "file",
+            "path": "qt.conf"
+        }
+    ],
+    "build-commands": [
+        "install -D -m644 qt.conf /app/bin/qt.conf"
+    ]
+}

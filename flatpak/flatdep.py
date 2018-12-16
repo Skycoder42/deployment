@@ -10,8 +10,9 @@ class FlatMod:
 	id: str = ""
 	depends: list
 
-	def __init__(self):
+	def __init__(self, id: str = ""):
 		self.depends = []
+		self.id = id
 
 	def __repr__(self):
 		return self.id + "[" + ", ".join(self.depends) + "]"
@@ -28,7 +29,7 @@ class FlatMod:
 	def resolve_depends(self) -> list:
 		reslist = []
 		self.resolve_depends_impl(reslist)
-		result = []
+		result = [FlatMod("flatdep").full_path()]
 		seen = set()
 		for item in reslist:
 			if item not in seen:
@@ -42,8 +43,7 @@ class FlatMod:
 	@staticmethod
 	def load(path: str):
 		with open(path, "r") as infile:
-			mod = FlatMod()
-			mod.id = os.path.splitext(os.path.basename(path))[0]
+			mod = FlatMod(os.path.splitext(os.path.basename(path))[0])
 			data = json.load(infile)
 			mod.depends = data["depends"] if "depends" in data else []
 			return mod, data
@@ -64,14 +64,8 @@ def flatdep(target: str):
 			"name": "flatdep-modules",
 			"buildsystem": "simple",
 			"modules": deplist,
-			"sources": [
-				{
-					"type": "file",
-					"path": "qt.conf"
-				}
-			],
 			"build-commands": [
-				"install -D -m644 qt.conf /app/bin/qt.conf"
+				"echo all modules installed"
 			]
 		}
 		json.dump(mod_json, out_file, indent=4)

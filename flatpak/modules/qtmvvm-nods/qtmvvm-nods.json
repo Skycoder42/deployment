@@ -1,18 +1,22 @@
 {
-	"name": "qtservice",
+	"name": "qtmvvm",
 	"buildsystem": "qmake",
-	"make-install-args": ["INSTALL_ROOT=/app/service"],
+	"make-install-args": ["INSTALL_ROOT=/app/mvvm"],
 	"build-options": {
 		"env": {
 			"QPMX_CACHE_DIR": "/app/.qpmx"
 		},
 		"build-args": [ "--share=network" ]
 	},
+	"depends": [
+		"python",
+		"qpmx"
+	],
 	"sources": [
 		{
 			"type": "git",
-			"url": "https://github.com/Skycoder42/QtService.git",
-			"tag": "1.1.0"
+			"url": "https://github.com/Skycoder42/QtMvvm.git",
+			"tag": "1.1.4-3"
 		}
 	],
 	"cleanup": [
@@ -21,6 +25,7 @@
 		"/lib/cmake",
 		"/lib/mkspecs",
 		"/lib/pkgconfig",
+		"/lib/python3.7",
 		"/include",
 		"/doc",
 		"/translations/*.ts",
@@ -28,6 +33,6 @@
 		"*.prl"
 	],
 	"post-install": [
-		"/app/fix-module.sh service service"
+		"/app/fix-module.sh mvvm mvvmcore:qsettingsgenerator mvvmwidgets mvvmquick"
 	]
 }

@@ -1,7 +1,7 @@
 {
-	"name": "qtdatasync",
+	"name": "qtmvvm",
 	"buildsystem": "qmake",
-	"make-install-args": ["INSTALL_ROOT=/app/datasync"],
+	"make-install-args": ["INSTALL_ROOT=/app/mvvm"],
 	"build-options": {
 		"env": {
 			"QPMX_CACHE_DIR": "/app/.qpmx"
@@ -9,22 +9,16 @@
 		"build-args": [ "--share=network" ]
 	},
 	"depends": [
-		"libsecret",
+		"python",
 		"qpmx",
-		"qtscxml",
-		"qtremoteobjects",
-		"qtjsonserializer",
-		"qtservice"
+		"qtdatasync"
 	],
 	"sources": [
 		{
 			"type": "git",
-			"url": "https://github.com/Skycoder42/QtDataSync.git",
-			"tag": "4.2.0-2"
+			"url": "https://github.com/Skycoder42/QtMvvm.git",
+			"tag": "1.1.4-3"
 		}
-	],
-	"config-opts": [
-		"CONFIG+=system_cryptopp"
 	],
 	"cleanup": [
 		"/.qpmx",
@@ -32,14 +26,14 @@
 		"/lib/cmake",
 		"/lib/mkspecs",
 		"/lib/pkgconfig",
+		"/lib/python3.7",
 		"/include",
 		"/doc",
-		"/services",
 		"/translations/*.ts",
 		"*.la",
 		"*.prl"
 	],
 	"post-install": [
-		"/app/fix-module.sh datasync datasync"
+		"/app/fix-module.sh mvvm mvvmcore:qsettingsgenerator mvvmwidgets mvvmquick mvvmdatasynccore mvvmdatasyncwidgets mvvmdatasyncquick"
 	]
 }
