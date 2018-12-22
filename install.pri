@@ -37,6 +37,8 @@ isEmpty(INSTALL_HEADERS): INSTALL_HEADERS = $${PREFIX}/include
 isEmpty(INSTALL_PLUGINS): INSTALL_PLUGINS = $${PREFIX}/plugins
 isEmpty(INSTALL_TRANSLATIONS): INSTALL_TRANSLATIONS = $${PREFIX}/translations
 isEmpty(INSTALL_SHARE): INSTALL_SHARE = $${PREFIX}/share
+isEmpty(INSTALL_PKGCONFIG): INSTALL_PKGCONFIG = $${INSTALL_LIBS}/pkgconfig
+isEmpty(INSTALL_WWW): INSTALL_WWW = $${INSTALL_SHARE}/www
 
 auto_lrelease: PRE_TARGETDEPS += lrelease
 android: CONFIG += no_headers_install
