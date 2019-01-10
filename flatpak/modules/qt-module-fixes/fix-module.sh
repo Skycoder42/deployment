@@ -36,5 +36,10 @@ for modList in "$@"; do
 	done
 done
 
+extraLibDir="$usrdir/lib/x86_64-linux-gnu"
+if [ -e "$extraLibDir" ]; then
+	cp -ar "$extraLibDir/." /app/lib/
+	rm -rf "$extraLibDir"
+fi
 cp -ar "$usrdir/." /app/
 rm -rf "$rootdir"
